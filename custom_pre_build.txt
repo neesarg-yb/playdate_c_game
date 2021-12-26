@@ -1,0 +1,19 @@
+echo In pre-build step!
+call :cmFindPlaydateSim
+
+:cmFindPlaydateSim
+setlocal
+echo.    Error Level Start: %errorlevel%
+tasklist /FI "IMAGENAME eq PlaydateSimulator.exe" 2>NUL | find /I /N "PlaydateSimulator.exe" 1>NUL
+echo.    Error Level Playdate Sim Running: %errorlevel%
+if %errorlevel% neq 0 goto :cmEnd
+
+:cmKillPlaydateSim
+echo.    Trying to kill simulator process..
+taskkill /im PlaydateSimulator.exe /f
+wait PlaydsteSimulator.exe 2> NUL
+
+:cmEnd
+endlocal
+echo Pre-build step complete
+exit 0

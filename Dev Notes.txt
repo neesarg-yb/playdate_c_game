@@ -1,0 +1,20 @@
+[12/25/2021]
+
+--------------------------
+ Rebuild Solution Failing
+--------------------------
+On Rebuild Solution, visual studio seems to be throwing an error - Could not create folder.
+Culprit seems to be following command in post-build steps:
+"C:\Program Files (x86)\Playdate\bin\pdc" -sdkpath "C:/Program Files (x86)/Playdate" "C:/Users/Neesarg/Developer/Playdate/Examples SDK 1.7/<Game Name>/Source" "C:/Users/Neesarg/Developer/Playdate/Examples SDK 1.7/<Game Name>/<Game Name>.pdx"
+
+To fix it, I had to remove the output folder before calling the pdc exe.
+So I added following line, right before it:
+rmdir /s /q "C:/Users/Neesarg/Developer/Playdate/Examples SDK 1.7/Particles/<Game Name>.pdx"
+
+Checkout custom_post_build.txt for full script.
+
+---------------------------------------------------------------------------------
+ Build Solution would fail if Playdate Simulator is running the output .pdx file
+---------------------------------------------------------------------------------
+Basically I had to kill PlaydateSimulator.exe if it is running before kicking off new build.
+To fix that, I added pre-build step as provided in custom_pre_build.txt

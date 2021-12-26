@@ -1,0 +1,37 @@
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy "C:/Users/Neesarg/Developer/Playdate/All The Sheep/build/Debug/all_the_sheep.dll" "C:/Users/Neesarg/Developer/Playdate/All The Sheep/Source/pdex.dll"
+if %errorlevel% neq 0 goto :cmEnd
+
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+
+:cmErrorLevel
+exit /b %1
+
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E touch "C:/Users/Neesarg/Developer/Playdate/All The Sheep/Source/pdex.bin"
+if %errorlevel% neq 0 goto :cmEnd
+
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+
+:cmErrorLevel
+exit /b %1
+
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+setlocal
+rmdir /s /q "C:/Users/Neesarg/Developer/Playdate/All The Sheep/all_the_sheep.pdx"
+"C:\Program Files (x86)\Playdate\bin\pdc" -sdkpath "C:/Program Files (x86)/Playdate" "C:/Users/Neesarg/Developer/Playdate/All The Sheep/Source" "C:/Users/Neesarg/Developer/Playdate/All The Sheep/all_the_sheep.pdx"
+if %errorlevel% neq 0 goto :cmEnd
+
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+
+:cmErrorLevel
+exit /b %1
+
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
