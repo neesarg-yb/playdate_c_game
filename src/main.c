@@ -12,7 +12,7 @@
 static PlaydateAPI* pd = NULL;
 static LCDFont* font;
 
-#define TEXT_WIDTH 175
+#define TEXT_WIDTH 95
 #define TEXT_HEIGHT 16
 
 int x = (400-TEXT_WIDTH)/2;
@@ -26,7 +26,7 @@ update(void* ud)
 	(void)ud;
 
 	pd->graphics->clear(kColorWhite);
-	pd->graphics->drawText("Hello from Visual Studio!", strlen("Hello from Visual Studio!"), kASCIIEncoding, x, y);
+	pd->graphics->drawText("Sheep Game!", strlen("Sheep Game!"), kASCIIEncoding, x, y);
 
 	x += dx; y += dy;
 	
