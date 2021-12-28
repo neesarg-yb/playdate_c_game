@@ -26,7 +26,7 @@ update(void* ud)
 	(void)ud;
 
 	pd->graphics->clear(kColorWhite);
-	pd->graphics->drawText("Hello World!", strlen("Hello World!"), kASCIIEncoding, x, y);
+	pd->graphics->drawText("Hello Release Buuds!", strlen("Hello Release Buuds!"), kASCIIEncoding, x, y);
 
 	x += dx; y += dy;
 	
