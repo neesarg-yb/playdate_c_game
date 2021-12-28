@@ -4,8 +4,8 @@
 1. Get [Playdate SDK 1.7.0](https://devforum.play.date/) & Simulator
 2. Have Visual Studio 2019 installed
 3. gcc-arm-none-eabi compiler [download here](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads)
-4. Install CMake [link](https://cmake.org/download/)
-[//]: # (End of list)
+4. Install CMake [link](https://cmake.org/download/)  
+<!-- -->
 **Note:** Make sure to mark Add PATH variables during the cmake & gcc installations
 
 ### Make sure!
