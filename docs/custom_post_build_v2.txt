@@ -1,0 +1,60 @@
+echo Starting post-build steps!
+setlocal
+set DLLDIR=$(SolutionDir)$(Configuration)
+set OUTPUTDIR=$(SolutionDir)..
+set SOURCEDIR=$(SolutionDir)..\Source
+set PDSDKDIR=C:\Program Files (x86)\Playdate
+
+set "DLLDIR=%DLLDIR:\=/%"
+set "OUTPUTDIR=%OUTPUTDIR:\=/%"
+set "SOURCEDIR=%SOURCEDIR:\=/%"
+set "PDSDKDIR=%PDSDKDIR:\=/%"
+
+echo. All the converted paths as below,
+echo.  DLLDIR    = %DLLDIR%
+echo.  OUTPUTDIR = %OUTPUTDIR%
+echo.  SOURCEDIR = %SOURCEDIR%
+echo.  PDSDKDIR  = %PDSDKDIR%
+
+echo. Now stating cmake to build dll(s)..
+"C:\Program Files\CMake\bin\cmake.exe" -E copy "%DLLDIR%/$(ProjectName).dll" "%SOURCEDIR%/pdex.dll"
+if %errorlevel% neq 0 goto :cmEnd
+
+:cmEnd
+call :cmErrorLevel %errorlevel% & goto :cmDone
+
+:cmErrorLevel
+exit /b %1
+
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+echo. Now starting to cmake bin..
+"C:\Program Files\CMake\bin\cmake.exe" -E touch "%SOURCEDIR%/pdex.bin"
+echo. Made bin file
+if %errorlevel% neq 0 goto :cmEnd
+
+:cmEnd
+call :cmErrorLevel %errorlevel% & goto :cmDone
+
+:cmErrorLevel
+exit /b %1
+
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+echo. Removing old .pdx file..
+rmdir /s /q "%OUTPUTDIR%/$(ProjectName).pdx"
+"C:\Program Files (x86)\Playdate\bin\pdc" -sdkpath "%PDSDKDIR%" "%SOURCEDIR%" "%OUTPUTDIR%/$(ProjectName).pdx"
+if %errorlevel% neq 0 goto :cmEnd
+
+:cmEnd
+call :cmErrorLevel %errorlevel% & goto :cmDone
+
+:cmErrorLevel
+exit /b %1
+
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+
+:VCEnd
+endlocal
+echo Ended post-build steps.

@@ -18,3 +18,15 @@ Checkout custom_post_build.txt for full script.
 ---------------------------------------------------------------------------------
 Basically I had to kill PlaydateSimulator.exe if it is running before kicking off new build.
 To fix that, I added pre-build step as provided in custom_pre_build.txt
+
+
+[12/28/2021]
+
+----------------------
+ Getting rid of cmake 
+----------------------
+Replaced hardcoded paths in project building steps with relative paths, so now I can clone the repo and VS project would build out fine regardless of which directory I'm cloning it to. 
+
+Make sure you have following two installed though!
+ CMake at C:\Program Files\CMake\bin\cmake.exe
+ Playdate SDK 1.7.0 at C:\Program Files (x86)\Playdate\

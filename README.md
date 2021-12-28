@@ -1,9 +1,16 @@
 # All The Sheep
+Cloned using Hello World cmake project from [Playdate SDK 1.7.0](https://devforum.play.date/)\
+Modified to work as Visual Studio 2019 project.
 
-Cloned using Hello World c project from [Playdate SDK 1.7.0](https://devforum.play.date/)
+**Make sure!** 
+SDK is installed at C:\Program Files (x86)\Playdate\
+CMake is at C:\Program Files\CMake\bin\cmake.exe
 
+**Repo Structure**
 /build: Visual Studio Solution files\
 /src: C code\
 /docs: Other project related documentation
 
-Use Debug config to build the solution - haven't tried Release yet! Output would be a pdx file placed under root of this directory. The pdx can be run using PlaydateSimulator which is part of SDK 1.7.0
+**Output**
+/.pdx: Game package get created on compilation (you'd run this on Playdate Simulator)\
+/build/Debug & /build/Release: Output from VS compilation
