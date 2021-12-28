@@ -88,34 +88,66 @@
     <PostBuildEvent>
       <Message>
       </Message>
-      <Command>setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -E copy "C:/Users/Neesarg/Developer/Playdate/All The Sheep/build/Debug/all_the_sheep.dll" "C:/Users/Neesarg/Developer/Playdate/All The Sheep/Source/pdex.dll"
+      <Command>echo Starting post-build steps!
+setlocal
+set DLLDIR=$(SolutionDir)$(Configuration)
+set OUTPUTDIR=$(SolutionDir)..
+set SOURCEDIR=$(SolutionDir)..\Source
+set PDSDKDIR=C:\Program Files (x86)\Playdate
+
+set "DLLDIR=%DLLDIR:\=/%"
+set "OUTPUTDIR=%OUTPUTDIR:\=/%"
+set "SOURCEDIR=%SOURCEDIR:\=/%"
+set "PDSDKDIR=%PDSDKDIR:\=/%"
+
+echo. All the converted paths as below,
+echo.  DLLDIR    = %DLLDIR%
+echo.  OUTPUTDIR = %OUTPUTDIR%
+echo.  SOURCEDIR = %SOURCEDIR%
+echo.  PDSDKDIR  = %PDSDKDIR%
+
+echo. Now stating cmake to build dll(s)..
+"C:\Program Files\CMake\bin\cmake.exe" -E copy "%DLLDIR%/$(ProjectName).dll" "%SOURCEDIR%/pdex.dll"
 if %errorlevel% neq 0 goto :cmEnd
+
 :cmEnd
-endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+
 :cmErrorLevel
 exit /b %1
+
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -E touch "C:/Users/Neesarg/Developer/Playdate/All The Sheep/Source/pdex.bin"
+echo. Now starting to cmake bin..
+"C:\Program Files\CMake\bin\cmake.exe" -E touch "%SOURCEDIR%/pdex.bin"
+echo. Made bin file
 if %errorlevel% neq 0 goto :cmEnd
+
 :cmEnd
-endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+
 :cmErrorLevel
 exit /b %1
+
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
-setlocal
-rmdir /s /q "C:/Users/Neesarg/Developer/Playdate/All The Sheep/all_the_sheep.pdx"
-"C:\Program Files (x86)\Playdate\bin\pdc" -sdkpath "C:/Program Files (x86)/Playdate" "C:/Users/Neesarg/Developer/Playdate/All The Sheep/Source" "C:/Users/Neesarg/Developer/Playdate/All The Sheep/all_the_sheep.pdx"
+echo. Removing old .pdx file..
+rmdir /s /q "%OUTPUTDIR%/$(ProjectName).pdx"
+"C:\Program Files (x86)\Playdate\bin\pdc" -sdkpath "%PDSDKDIR%" "%SOURCEDIR%" "%OUTPUTDIR%/$(ProjectName).pdx"
 if %errorlevel% neq 0 goto :cmEnd
+
 :cmEnd
-endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+
 :cmErrorLevel
 exit /b %1
+
 :cmDone
-if %errorlevel% neq 0 goto :VCEnd</Command>
+if %errorlevel% neq 0 goto :VCEnd
+
+:VCEnd
+endlocal
+echo Ended post-build steps.</Command>
     </PostBuildEvent>
     <Link>
       <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
