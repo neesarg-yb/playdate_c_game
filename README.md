@@ -1,4 +1,4 @@
-# Playdate Hello World C Project - Visual Studio 
+# Playdate Hello World - Visual Studio C Project
 
 ### SDK & Development Tools
 1. Get [Playdate SDK 1.7.0](https://devforum.play.date/) & Simulator
