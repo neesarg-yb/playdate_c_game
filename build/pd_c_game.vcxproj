@@ -18,7 +18,7 @@
     <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
     <Keyword>Win32Proj</Keyword>
     <Platform>x64</Platform>
-    <ProjectName>all_the_sheep</ProjectName>
+    <ProjectName>pd_c_game</ProjectName>
     <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -70,11 +70,11 @@
       </SuppressStartupBanner>
       <UseFullPaths>false</UseFullPaths>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;TARGET_SIMULATOR=1;_WINDLL=1;TARGET_EXTENSION=1;CMAKE_INTDIR="Debug";all_the_sheep_EXPORTS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;TARGET_SIMULATOR=1;_WINDLL=1;TARGET_EXTENSION=1;CMAKE_INTDIR="Debug";pd_c_game_EXPORTS</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;TARGET_SIMULATOR=1;_WINDLL=1;TARGET_EXTENSION=1;CMAKE_INTDIR=\"Debug\";all_the_sheep_EXPORTS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;TARGET_SIMULATOR=1;_WINDLL=1;TARGET_EXTENSION=1;CMAKE_INTDIR=\"Debug\";pd_c_game_EXPORTS</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Program Files (x86)\Playdate\C_API;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
@@ -155,7 +155,7 @@ echo Ended post-build steps.</Command>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>$(SolutionDir)$(Configuration)\all_the_sheep.lib</ImportLibrary>
+      <ImportLibrary>$(SolutionDir)$(Configuration)\pd_c_game.lib</ImportLibrary>
       <ProgramDataBaseFile>$(SolutionDir)$(Configuration)\$(ProjectName).pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
@@ -198,13 +198,13 @@ exit 0</Command>
       </SuppressStartupBanner>
       <UseFullPaths>false</UseFullPaths>
       <WarningLevel>EnableAllWarnings</WarningLevel>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;TARGET_SIMULATOR=1;_WINDLL=1;TARGET_EXTENSION=1;CMAKE_INTDIR="Release";all_the_sheep_EXPORTS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;TARGET_SIMULATOR=1;_WINDLL=1;TARGET_EXTENSION=1;CMAKE_INTDIR="Release";pd_c_game_EXPORTS</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <DebugInformationFormat>
       </DebugInformationFormat>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;TARGET_SIMULATOR=1;_WINDLL=1;TARGET_EXTENSION=1;CMAKE_INTDIR=\"Release\";all_the_sheep_EXPORTS</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;TARGET_SIMULATOR=1;_WINDLL=1;TARGET_EXTENSION=1;CMAKE_INTDIR=\"Release\";pd_c_game_EXPORTS</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>C:\Program Files (x86)\Playdate\C_API;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
@@ -285,7 +285,7 @@ echo Ended post-build steps.</Command>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>$(SolutionDir)$(Configuration)\all_the_sheep.lib</ImportLibrary>
+      <ImportLibrary>$(SolutionDir)$(Configuration)\pd_c_game.lib</ImportLibrary>
       <ProgramDataBaseFile>$(SolutionDir)$(Configuration)\$(ProjectName).pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
