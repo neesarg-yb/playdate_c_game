@@ -10,7 +10,7 @@
 
 ### Make sure!
 SDK is installed at C:\Program Files (x86)\Playdate\
-CMake is at C:\Program Files\CMake\bin\cmake.exe\  
+CMake is at C:\Program Files\CMake\bin\cmake.exe
 <!-- -->
 **Note:** There are still some references hardcoded from VS solution to those locations.
 
