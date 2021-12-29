@@ -15,12 +15,22 @@ PlaydateAPI*	g_pd	= NULL;
 LCDFont*		g_font	= NULL;
 Game*			g_game	= NULL;
 
+static int runFrame( void* ud )
+{
+	( void ) ud;
+
+	g_game->update( 0.f );
+	g_game->render();
+
+	return 1;
+}
+
 static void init()
 {
 	g_game = createGame();
 	g_game->init();
 
-	g_pd->system->setUpdateCallback( g_game->update, NULL );
+	g_pd->system->setUpdateCallback( runFrame, NULL );
 }
 
 static void terminate()
