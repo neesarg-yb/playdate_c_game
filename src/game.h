@@ -2,8 +2,13 @@
 
 typedef struct
 {
-	int ( *update )( void* ud );
+	void	( *init ) ( );				// Call after game_common global g_pd var is initialized
+	int		( *update )( void* ud );	// Call every frame
+	void	( *terminate ) ( );			// Call before shutting down the game
 } Game;
 
-Game*	initGame();						// Call to initialize above structure & get its pointer
-void	terminateGame( Game** game );	// Call on exiting the game, to cleanup the provided struct & its memory
+// Gives you a Game pointer which has all the above structure func pointers set up
+Game*	createGame();
+
+// Deletes the provided game & clears its pointer
+void	destroyGame( Game** game );

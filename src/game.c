@@ -4,24 +4,28 @@
 #include "game_common.h"
 
 // Declarations
-static int updateGame( void* ud );
+static void	initGame();
+static int	updateGame( void* ud );
+static void terminateGame();
 
-// Definitions - Exposed
-Game* initGame()
+// Exposed functions
+Game* createGame()
 {
 	Game* newGame = g_pd->system->realloc( NULL, sizeof( Game ) );
-	newGame->update = updateGame;
+	newGame->update		= updateGame;
+	newGame->init		= initGame;
+	newGame->terminate	= terminateGame;
 
 	return newGame;
 }
 
-void terminateGame( Game** game )
+void destroyGame( Game** game )
 {
 	g_pd->system->realloc( *game, 0U );
 	*game = NULL;
 }
 
-// Definitions - Unexposed
+// Internal functions
 static int updateGame(  void* ud )
 {
 	( void ) ud;
@@ -32,4 +36,17 @@ static int updateGame(  void* ud )
 	g_pd->system->drawFPS( 0, 0 );
 
 	return 1;
+}
+
+static void initGame()
+{
+	g_pd->display->setRefreshRate( 20 );
+
+	g_font = g_pd->graphics->loadFont( "/System/Fonts/Asheville-Sans-14-Bold.pft", NULL );
+	g_pd->graphics->setFont( g_font );
+}
+
+static void terminateGame()
+{
+	g_font = NULL;
 }

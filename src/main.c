@@ -15,22 +15,18 @@ PlaydateAPI*	g_pd	= NULL;
 LCDFont*		g_font	= NULL;
 Game*			g_game	= NULL;
 
-static void init( PlaydateAPI* pd )
+static void init()
 {
-	// Setup device & fonts
-	g_pd = pd;
-	g_pd->display->setRefreshRate( 20 );
-	g_font = g_pd->graphics->loadFont( "/System/Fonts/Asheville-Sans-14-Bold.pft", NULL );
-	g_pd->graphics->setFont( g_font );
+	g_game = createGame();
+	g_game->init();
 
-	// Setup game
-	g_game = initGame();
 	g_pd->system->setUpdateCallback( g_game->update, NULL );
 }
 
 static void terminate()
 {
-	terminateGame( &g_game );
+	g_game->terminate();
+	destroyGame( &g_game );
 }
 
 DllExport int eventHandler(PlaydateAPI* playdate, PDSystemEvent event, uint32_t arg)
@@ -39,11 +35,13 @@ DllExport int eventHandler(PlaydateAPI* playdate, PDSystemEvent event, uint32_t 
 
 	if ( event == kEventInit )
 	{
-		init( playdate );
+		g_pd = playdate;
+		init();
 	}
 	else if( event == kEventTerminate )
 	{
 		terminate();
+		g_pd = NULL;
 	}
 	
 	return 0;

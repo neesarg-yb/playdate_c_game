@@ -5,7 +5,7 @@ struct PlaydateAPI;
 struct LCDFont;
 struct Game;
 
-// All the global variables declared here
-extern PlaydateAPI*	g_pd;
-extern LCDFont*		g_font;
-extern Game*		g_game;
+// Global vars
+extern PlaydateAPI*	g_pd;			// Set before game is created!
+extern Game*		g_game;			// Created on kEventInit
+extern LCDFont*		g_font;			// Created on g_game->init()
