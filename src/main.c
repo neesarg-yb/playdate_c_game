@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 #include "pd_api.h"
+#include "game.h"
 
 #ifdef _WINDLL
 #define DllExport __declspec(dllexport)
@@ -9,52 +10,40 @@
 #define DllExport
 #endif
 
-static PlaydateAPI* pd = NULL;
-static LCDFont* font;
+// Extern pointers exposed in game_common.h
+PlaydateAPI*	g_pd	= NULL;
+LCDFont*		g_font	= NULL;
+Game*			g_game	= NULL;
 
-#define TEXT_WIDTH 95
-#define TEXT_HEIGHT 16
-
-int x = (400-TEXT_WIDTH)/2;
-int y = (240-TEXT_HEIGHT)/2;
-int dx = 1;
-int dy = 2;
-
-static int
-update(void* ud)
+static void init( PlaydateAPI* pd )
 {
-	(void)ud;
+	// Setup device & fonts
+	g_pd = pd;
+	g_pd->display->setRefreshRate( 20 );
+	g_font = g_pd->graphics->loadFont( "/System/Fonts/Asheville-Sans-14-Bold.pft", NULL );
+	g_pd->graphics->setFont( g_font );
 
-	pd->graphics->clear(kColorWhite);
-	pd->graphics->drawText("Sheep Game!", strlen("Sheep Game!"), kASCIIEncoding, x, y);
-
-	x += dx; y += dy;
-	
-	if ( x < 0 || x > LCD_COLUMNS - TEXT_WIDTH )
-		dx = -dx;
-	
-	if ( y < 0 || y > LCD_ROWS - TEXT_HEIGHT )
-		dy = -dy;
-        
-	pd->system->drawFPS(0,0);
-
-	return 1;
+	// Setup game
+	g_game = initGame();
+	g_pd->system->setUpdateCallback( g_game->update, NULL );
 }
 
+static void terminate()
+{
+	terminateGame( &g_game );
+}
 
-DllExport int
-eventHandler(PlaydateAPI* playdate, PDSystemEvent event, uint32_t arg)
+DllExport int eventHandler(PlaydateAPI* playdate, PDSystemEvent event, uint32_t arg)
 {
 	(void)arg;
 
 	if ( event == kEventInit )
 	{
-		pd = playdate;
-		pd->display->setRefreshRate(20);
-		pd->system->setUpdateCallback(update, NULL);
-
-		font = pd->graphics->loadFont("/System/Fonts/Asheville-Sans-14-Bold.pft", NULL);
-		pd->graphics->setFont(font);
+		init( playdate );
+	}
+	else if( event == kEventTerminate )
+	{
+		terminate();
 	}
 	
 	return 0;
