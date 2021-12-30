@@ -4,21 +4,45 @@
     <Filter Include="Source Files">
       <UniqueIdentifier>{F60210F9-09D1-341E-BB42-2C1745F9FEBD}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\math">
+      <UniqueIdentifier>{3cadce19-b767-4505-b650-0522fd8eca1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\game-components">
+      <UniqueIdentifier>{b0a606c1-ffaf-4bf6-a762-78eff9290e02}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\angle.c">
+      <Filter>Source Files\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\vector.c">
+      <Filter>Source Files\math</Filter>
+    </ClCompile>
     <ClCompile Include="..\src\game.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\locomotion.c">
+      <Filter>Source Files\game-components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\game_common.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="..\src\angle.h">
+      <Filter>Source Files\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\vector.h">
+      <Filter>Source Files\math</Filter>
     </ClInclude>
     <ClInclude Include="..\src\game.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\game_common.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\locomotion.h">
+      <Filter>Source Files\game-components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

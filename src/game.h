@@ -1,6 +1,6 @@
 #pragma once
 
-typedef struct
+typedef struct Game
 {
 	// Call after game_common global g_pd var is initialized
 	void	( *init ) ( );

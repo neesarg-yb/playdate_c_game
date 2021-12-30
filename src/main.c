@@ -19,7 +19,7 @@ static int runFrame( void* ud )
 {
 	( void ) ud;
 
-	g_game->update( 0.f );
+	g_game->update( 0.05f );
 	g_game->render();
 
 	return 1;

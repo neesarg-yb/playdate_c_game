@@ -315,12 +315,18 @@ exit 0</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\angle.c" />
     <ClCompile Include="..\src\game.c" />
     <ClCompile Include="..\src\main.c" />
+    <ClCompile Include="..\src\locomotion.c" />
+    <ClCompile Include="..\src\vector.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\src\angle.h" />
     <ClInclude Include="..\src\game.h" />
     <ClInclude Include="..\src\game_common.h" />
+    <ClInclude Include="..\src\locomotion.h" />
+    <ClInclude Include="..\src\vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

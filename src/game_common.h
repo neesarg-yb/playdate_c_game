@@ -1,9 +1,8 @@
 #pragma once
+#include "pd_api.h"
 
 // Forward declarations
-struct PlaydateAPI;
-struct LCDFont;
-struct Game;
+typedef struct Game Game;
 
 // Global vars
 extern PlaydateAPI*	g_pd;			// Set before game is created!
