@@ -8,7 +8,7 @@
 <!-- -->
 **Note:** Make sure to mark Add PATH variables during the cmake & gcc installations
 
-### Make sure!
+### SDK Installation Locations
 SDK is installed at C:\Program Files (x86)\Playdate\
 CMake is at C:\Program Files\CMake\bin\cmake.exe\  
 <!-- -->
@@ -22,3 +22,15 @@ CMake is at C:\Program Files\CMake\bin\cmake.exe\
 ### Output
 /.pdx: Game package get created on compilation (you'd run this on Playdate Simulator)\
 /build/Debug & /build/Release: Output from VS compilation
+
+### Building for Playdate Simulator
+Simply use Visual Studio to build .pdx files. That would run on simulator just fine.
+
+### Building for Playdate Console
+To do so, I have only had success with nmake. Here are the steps,
+1. Open *x64 Native Tools Command Prompt for VS 2019* from Start Menu
+2. Go to build directory of the project
+3. Execute command `cmake .. -G "NMake Makefiles" --toolchain="SDK_PATH\C_API\buildsupport\arm.cmake"` 
+4. Execute command `nmake`
+<!-- -->
+**Note:** I had to make sure that Source/ folder was created before running make steps.
