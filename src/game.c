@@ -6,27 +6,27 @@
 #include "vector.h"
 
 // Declarations
-static void	initGame();
-static void terminateGame();
-static void	updateGame( float deltaSeconds );
-static void renderGame();
+static void	InitGame();
+static void TerminateGame();
+static void	UpdateGame( float deltaSeconds );
+static void RenderGame();
 
-static void updateDrawOffset();
-static void updateTargetPosition( float deltaSeconds );
+static void UpdateDrawOffset();
+static void UpdateTargetPosition( float deltaSeconds );
 
 // Exposed functions
-Game* createGame()
+Game* CreateGame()
 {
 	Game* newGame = g_pd->system->realloc( NULL, sizeof( Game ) );
-	newGame->init		= initGame;
-	newGame->update		= updateGame;
-	newGame->render		= renderGame;
-	newGame->terminate	= terminateGame;
+	newGame->Init		= InitGame;
+	newGame->Update		= UpdateGame;
+	newGame->Render		= RenderGame;
+	newGame->Terminate	= TerminateGame;
 
 	return newGame;
 }
 
-void destroyGame( Game** game )
+void DestroyGame( Game** game )
 {
 	g_pd->system->realloc( *game, 0U );
 	*game = NULL;
@@ -38,7 +38,7 @@ Locomotion	c_dogLoc;
 Vec2		c_sheepPos;
 
 // Internal functions
-static void initGame()
+static void InitGame()
 {
 	g_pd->display->setRefreshRate( 20 );
 
@@ -54,26 +54,26 @@ static void initGame()
 	c_dogLoc.destination = c_sheepPos;
 }
 
-static void terminateGame()
+static void TerminateGame()
 {
 	g_font = NULL;
 }
 
-static void updateGame( float deltaSeconds )
+static void UpdateGame( float deltaSeconds )
 {
-	updateTargetPosition( deltaSeconds );
+	UpdateTargetPosition( deltaSeconds );
 	c_dogLoc.destination = c_sheepPos;
 
-	updateLocomotion( &c_dogLoc, deltaSeconds );
+	UpdateLocomotion( &c_dogLoc, deltaSeconds );
 	//updateDrawOffset();
 }
 
-static void renderGame()
+static void RenderGame()
 {
 	g_pd->graphics->clear( kColorWhite );
 
 	g_pd->graphics->setDrawOffset( c_drawOffsetX, c_drawOffsetY );
-	g_pd->graphics->drawText( "Dog!", strlen( "Dog!" ), kASCIIEncoding, ( int ) ( c_dogLoc.position.x ), ( int ) ( c_dogLoc.position.y ) );
+	g_pd->graphics->drawText( "dog!", strlen( "dog!" ), kASCIIEncoding, ( int ) ( c_dogLoc.position.x ), ( int ) ( c_dogLoc.position.y ) );
 
 	g_pd->graphics->drawText( "sheep", strlen( "sheep" ), kASCIIEncoding, ( int ) ( c_sheepPos.x ), ( int ) ( c_sheepPos.y + 16.f ) );
 	g_pd->graphics->drawRect( c_sheepPos.x - 8, c_sheepPos.y, 4, 6, kColorBlack );
@@ -81,7 +81,7 @@ static void renderGame()
 	g_pd->system->drawFPS( 0, 0 );
 }
 
-static void updateDrawOffset()
+static void UpdateDrawOffset()
 {
 	int const cameraSpeed = -3;
 	PDButtons currentDownButtons = 0U;
@@ -106,7 +106,7 @@ static void updateDrawOffset()
 	c_drawOffsetY += ( dy * cameraSpeed );
 }
 
-static void updateTargetPosition( float deltaSeconds )
+static void UpdateTargetPosition( float deltaSeconds )
 {
 	float const targetMaxSpeed = 50.f;
 	PDButtons currentDownButtons = 0U;

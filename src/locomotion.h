@@ -11,4 +11,4 @@ typedef struct Locomotion
 
 } Locomotion;
 
-void updateLocomotion( Locomotion* locMo, float deltaSeconds );
+void UpdateLocomotion( Locomotion* locMo, float deltaSeconds );

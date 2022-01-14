@@ -15,28 +15,28 @@ PlaydateAPI*	g_pd	= NULL;
 LCDFont*		g_font	= NULL;
 Game*			g_game	= NULL;
 
-static int runFrame( void* ud )
+static int RunFrame( void* ud )
 {
 	( void ) ud;
 
-	g_game->update( 0.05f );
-	g_game->render();
+	g_game->Update( 0.05f );
+	g_game->Render();
 
 	return 1;
 }
 
-static void init()
+static void Init()
 {
-	g_game = createGame();
-	g_game->init();
+	g_game = CreateGame();
+	g_game->Init();
 
-	g_pd->system->setUpdateCallback( runFrame, NULL );
+	g_pd->system->setUpdateCallback( RunFrame, NULL );
 }
 
-static void terminate()
+static void Terminate()
 {
-	g_game->terminate();
-	destroyGame( &g_game );
+	g_game->Terminate();
+	DestroyGame( &g_game );
 }
 
 DllExport int eventHandler(PlaydateAPI* playdate, PDSystemEvent event, uint32_t arg)
@@ -46,11 +46,11 @@ DllExport int eventHandler(PlaydateAPI* playdate, PDSystemEvent event, uint32_t 
 	if ( event == kEventInit )
 	{
 		g_pd = playdate;
-		init();
+		Init();
 	}
 	else if( event == kEventTerminate )
 	{
-		terminate();
+		Terminate();
 		g_pd = NULL;
 	}
 	

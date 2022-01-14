@@ -30,7 +30,7 @@ Vec2 NormalizeVec2(Vec2 const a)
     return normalized;
 }
 
-Vec2 SumVec2(Vec2 const a, Vec2 const b)
+Vec2 AddVec2(Vec2 const a, Vec2 const b)
 {
     Vec2 sum = 
     {
@@ -102,7 +102,7 @@ float LengthIntVec2(IntVec2 const a)
     return len;
 }
 
-IntVec2 SumIntVec2(IntVec2 const a, IntVec2 b)
+IntVec2 AddIntVec2(IntVec2 const a, IntVec2 b)
 {
     IntVec2 sum = 
     {
