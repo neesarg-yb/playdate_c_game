@@ -85,6 +85,13 @@ Vec2 ModCompVec2(Vec2 const a, float const modifier)
     return modifiedVec;
 }
 
+Vec2 MoveTowardsVec2( Vec2 currentPos, Vec2 targetPos, float fraction )
+{
+	Vec2 towardsTarget = SubVec2( targetPos, currentPos );
+	currentPos = AddVec2( currentPos, ScaleVec2( towardsTarget, fraction ) );
+	return currentPos;
+}
+
 Vec2 Vec2FromIntVec2(IntVec2 from)
 {
     Vec2 vecToRet =

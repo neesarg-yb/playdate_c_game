@@ -27,6 +27,7 @@ Vec2  SubVec2(Vec2 const a, Vec2 const b);
 Vec2  ScaleVec2(Vec2 const a, float const scale);
 Vec2  DivVec2(Vec2 const a, float const divider);
 Vec2  ModCompVec2(Vec2 const a, float const modifier);
+Vec2  MoveTowardsVec2( Vec2 currentPos, Vec2 targetPos, float fraction );
 
 Vec2  Vec2FromIntVec2(IntVec2 const from);
 

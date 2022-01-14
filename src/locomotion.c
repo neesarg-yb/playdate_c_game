@@ -16,9 +16,6 @@ void UpdateLocomotion( Locomotion* locMo, float deltaSeconds )
 	Vec2 const targetVel = ScaleVec2( targetDir, locMo->maxSpeed );
 	locMo->velocity = ScaleVec2( AddVec2( locMo->velocity, targetVel ), 0.5f );
 
-	g_pd->system->logToConsole( "toDestination = %.2f, %.2f", toDestination.x, toDestination.y );
-	g_pd->system->logToConsole( "locMo->velocity = %.2f, %.2f", locMo->velocity.x, locMo->velocity.y );
-
 	// Update the position accordingly
 	float const distToTravel = LengthVec2( toDestination );
 	float const currentSpeed = LengthVec2( locMo->velocity );
