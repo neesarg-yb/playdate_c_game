@@ -3,7 +3,7 @@
 #include "pd_api.h"
 #include "game_common.h"
 #include "locomotion.h"
-#include "vector.h"
+#include "flock_tracker.h"
 
 // Declarations
 static void	InitGame();
@@ -39,8 +39,9 @@ void DestroyGame( Game** game )
 
 int c_drawOffsetX = 0;
 int c_drawOffsetY = 0;
-Locomotion	c_dogLoc;
-Vec2		c_sheepPos;
+Locomotion		c_dogLoc;
+Vec2			c_sheepPos;
+FlockTracker	c_flockTracker;
 
 // Internal functions
 static void InitGame()
@@ -52,11 +53,12 @@ static void InitGame()
 
 	// Game side variables
 	c_sheepPos = MakeVec2( 0.f, 0.f );
+	c_flockTracker = MakeFlockTracker( &c_sheepPos, 100.f, 90.f );
 
 	c_dogLoc.position = MakeVec2( 0.f, 0.f );
 	c_dogLoc.velocity = MakeVec2( 0.f, 0.f );
-	c_dogLoc.maxSpeed = 35.f;
-	c_dogLoc.destination = c_sheepPos;
+	c_dogLoc.maxSpeed = 60.f;
+	c_dogLoc.destination = c_flockTracker.targetPos;
 
 	// Init draw offset to center ship position
 	c_drawOffsetX = ( LCD_COLUMNS * 0.5f ) - c_sheepPos.x;
@@ -71,9 +73,10 @@ static void TerminateGame()
 static void UpdateGame( float deltaSeconds )
 {
 	UpdateTargetPosition( deltaSeconds );
-	c_dogLoc.destination = c_sheepPos;
+	c_dogLoc.destination = c_flockTracker.targetPos;
 
 	UpdateLocomotion( &c_dogLoc, deltaSeconds );
+	UpdateFlockTracker( &c_flockTracker );
 	UpdateDrawOffset();
 }
 
@@ -83,6 +86,7 @@ static void RenderGame()
 	g_pd->graphics->setDrawOffset( c_drawOffsetX, c_drawOffsetY );
 
 	RenderLandField();
+	RenderFlockTracker( &c_flockTracker );
 	RenderSheep();
 	RenderDog();
 
@@ -154,8 +158,8 @@ static void RenderLandField()
 
 static void RenderSheep()
 {
-	g_pd->graphics->drawText( "sheep", strlen( "sheep" ), kASCIIEncoding, ( int ) ( c_sheepPos.x ), ( int ) ( c_sheepPos.y + 16.f ) );
-	g_pd->graphics->drawRect( c_sheepPos.x - 8, c_sheepPos.y, 4, 6, kColorBlack );
+	g_pd->graphics->drawText( "sheep", strlen( "sheep" ), kASCIIEncoding, ( int ) ( c_sheepPos.x - 20.f), ( int ) ( c_sheepPos.y + 8.f ) );
+	g_pd->graphics->drawRect( c_sheepPos.x, c_sheepPos.y, 4, 6, kColorBlack );
 }
 
 static void RenderDog()

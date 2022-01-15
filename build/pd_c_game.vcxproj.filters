@@ -27,6 +27,9 @@
     <ClCompile Include="..\src\locomotion.c">
       <Filter>Source Files\game-components</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\flock_tracker.c">
+      <Filter>Source Files\game-components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\angle.h">
@@ -42,6 +45,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\src\locomotion.h">
+      <Filter>Source Files\game-components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\flock_tracker.h">
       <Filter>Source Files\game-components</Filter>
     </ClInclude>
   </ItemGroup>

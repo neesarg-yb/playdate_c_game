@@ -316,6 +316,7 @@ exit 0</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\src\angle.c" />
+    <ClCompile Include="..\src\flock_tracker.c" />
     <ClCompile Include="..\src\game.c" />
     <ClCompile Include="..\src\main.c" />
     <ClCompile Include="..\src\locomotion.c" />
@@ -323,6 +324,7 @@ exit 0</Command>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\angle.h" />
+    <ClInclude Include="..\src\flock_tracker.h" />
     <ClInclude Include="..\src\game.h" />
     <ClInclude Include="..\src\game_common.h" />
     <ClInclude Include="..\src\locomotion.h" />
