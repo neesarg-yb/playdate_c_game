@@ -16,12 +16,12 @@ Vec2 CalculateTargetPos( Vec2 center, float radius, float initialAngleDegrees )
 	return MakeVec2( targetPos.x, targetPos.y );
 }
 
-FlockTracker MakeFlockTracker( Vec2* flockCenter, float startingRingRadius, Angle initialAngle )
+FlockTracker MakeFlockTracker( Vec2* flockCenter, float startingRingRadius, float initialAngle )
 {
 	FlockTracker ft;
 	ft.flockCenter = flockCenter;
 	ft.ringRadius = startingRingRadius;
-	ft.targetAngle = initialAngle;
+	ft.targetAngle = MakeAngleFromDeg( initialAngle );
 
 	ft.targetPos = CalculateTargetPos( *ft.flockCenter, ft.ringRadius, DegreesFromAngle( ft.targetAngle ) );
 
