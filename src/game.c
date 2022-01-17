@@ -41,6 +41,7 @@ int c_drawOffsetX = 0;
 int c_drawOffsetY = 0;
 Locomotion		c_dogLoc;
 Vec2			c_sheepPos;
+float			c_sheepRunAwayDist = 65.f;
 FlockTracker	c_flockTracker;
 
 // Internal functions
@@ -61,8 +62,8 @@ static void InitGame()
 	c_dogLoc.destination = c_flockTracker.targetPos;
 
 	// Init draw offset to center ship position
-	c_drawOffsetX = ( LCD_COLUMNS * 0.5f ) - c_sheepPos.x;
-	c_drawOffsetY = ( LCD_ROWS * 0.5f ) - c_sheepPos.y;
+	c_drawOffsetX = ( int ) ( ( LCD_COLUMNS * 0.5f ) - c_sheepPos.x );
+	c_drawOffsetY = ( int ) ( ( LCD_ROWS * 0.5f ) - c_sheepPos.y );
 }
 
 static void TerminateGame()
@@ -75,8 +76,8 @@ static void UpdateGame( float deltaSeconds )
 	UpdateTargetPosition( deltaSeconds );
 	c_dogLoc.destination = c_flockTracker.targetPos;
 
-	UpdateLocomotion( &c_dogLoc, deltaSeconds );
-	UpdateFlockTracker( &c_flockTracker );
+	UpdateLocomotion( deltaSeconds, &c_dogLoc );
+	UpdateFlockTracker( deltaSeconds, &c_flockTracker );
 	UpdateDrawOffset();
 }
 
@@ -98,34 +99,13 @@ static void UpdateDrawOffset()
 	Vec2 const dogToSheepHalfVec = ScaleVec2( SubVec2( c_sheepPos, c_dogLoc.position ), 0.5f );
 	Vec2 const centerPos = AddVec2( c_dogLoc.position, dogToSheepHalfVec );
 
-	c_drawOffsetX = ( LCD_COLUMNS * 0.5f ) - centerPos.x;
-	c_drawOffsetY = ( LCD_ROWS * 0.5f ) - centerPos.y;
+	c_drawOffsetX = ( int )( ( LCD_COLUMNS * 0.5f ) - centerPos.x );
+	c_drawOffsetY = ( int )( ( LCD_ROWS * 0.5f ) - centerPos.y );
 }
 
 static void UpdateTargetPosition( float deltaSeconds )
 {
-	float const targetMaxSpeed = 50.f;
-	PDButtons currentDownButtons = 0U;
-	g_pd->system->getButtonState( &currentDownButtons, NULL, NULL );
-
-	float dx = 0.f;
-	{
-		if( currentDownButtons & kButtonLeft )
-			dx -= 1.f;
-		if( currentDownButtons & kButtonRight )
-			dx += 1.f;
-	}
-
-	float dy = 0.f;
-	{
-		if( currentDownButtons & kButtonUp )
-			dy -= 1.f;
-		if( currentDownButtons & kButtonDown )
-			dy += 1.f;
-	}
-
-	c_sheepPos.x += ( dx * targetMaxSpeed * deltaSeconds );
-	c_sheepPos.y += ( dy * targetMaxSpeed * deltaSeconds );
+	( void ) deltaSeconds;
 }
 
 static void RenderLandField()
@@ -158,8 +138,15 @@ static void RenderLandField()
 
 static void RenderSheep()
 {
+	// Sheep itself
 	g_pd->graphics->drawText( "sheep", strlen( "sheep" ), kASCIIEncoding, ( int ) ( c_sheepPos.x - 20.f), ( int ) ( c_sheepPos.y + 8.f ) );
 	g_pd->graphics->drawRect( c_sheepPos.x, c_sheepPos.y, 4, 6, kColorBlack );
+
+	// Run away ring
+	for( float a = 0.f, gap = 10.f, segment = 5.f; a <= 360.f - segment; a += gap )
+	{
+		g_pd->graphics->drawEllipse( c_sheepPos.x - c_sheepRunAwayDist, c_sheepPos.y - c_sheepRunAwayDist, c_sheepRunAwayDist * 2.f, c_sheepRunAwayDist * 2.f, 1.f, a, a + segment, kColorBlack );
+	}
 }
 
 static void RenderDog()

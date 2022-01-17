@@ -2,7 +2,7 @@
 #include "locomotion.h"
 #include "game_common.h"
 
-void UpdateLocomotion( Locomotion* locMo, float deltaSeconds )
+void UpdateLocomotion( float deltaSeconds, Locomotion* locMo )
 {
 	// How do you move to targetPosition?
 	// 
