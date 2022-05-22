@@ -24,8 +24,8 @@ endif()
 set(CMAKE_CONFIGURATION_TYPES "Debug;Release")
 
 # Game Name Customization
-set(PLAYDATE_GAME_NAME pd_c_game)
-set(PLAYDATE_GAME_DEVICE pd_c_game_DEVICE)
+set(PLAYDATE_GAME_NAME pd_c_game_fish)
+set(PLAYDATE_GAME_DEVICE pd_c_game_fish_DEVICE)
 
 aux_source_directory(src/ PROJECT_C_SOURCE_FILES)
 

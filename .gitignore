@@ -1,7 +1,5 @@
 # Exclude root level directories which are generated through Visual Studio on compilation
 *.pdx
-/Source/*
-!/Source/pdxinfo
 
 # Only include Visual Studio project files from the build folder
 /build/*

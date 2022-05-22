@@ -1,5 +1,5 @@
-name=C Game
-author=Developer Name
-description=C Game Template
-bundleID=com.panic.devnamegame1
-imagePath=
+name=Fishy Times
+author=Neesarg Banglawala
+description=A fishing game
+bundleID=com.panic.nbanglawala
+imagePath=Sprites/Cover
