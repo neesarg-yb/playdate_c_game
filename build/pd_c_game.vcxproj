@@ -56,7 +56,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Program Files (x86)\Playdate\C_API;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(PLAYDATE_SDK_PATH)\C_API;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -75,10 +75,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;TARGET_SIMULATOR=1;_WINDLL=1;TARGET_EXTENSION=1;CMAKE_INTDIR=\"Debug\";pd_c_game_EXPORTS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Program Files (x86)\Playdate\C_API;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(PLAYDATE_SDK_PATH)\C_API;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Program Files (x86)\Playdate\C_API;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(PLAYDATE_SDK_PATH)\C_API;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -93,7 +93,7 @@ setlocal
 set DLLDIR=$(SolutionDir)$(Configuration)
 set OUTPUTDIR=$(SolutionDir)..
 set SOURCEDIR=$(SolutionDir)..\Source
-set PDSDKDIR=C:\Program Files (x86)\Playdate
+set PDSDKDIR=%PLAYDATE_SDK_PATH%
 
 set "DLLDIR=%DLLDIR:\=/%"
 set "OUTPUTDIR=%OUTPUTDIR:\=/%"
@@ -107,7 +107,7 @@ echo.  SOURCEDIR = %SOURCEDIR%
 echo.  PDSDKDIR  = %PDSDKDIR%
 
 echo. Now stating cmake to build dll(s)..
-"C:\Program Files\CMake\bin\cmake.exe" -E copy "%DLLDIR%/$(ProjectName).dll" "%SOURCEDIR%/pdex.dll"
+"%PLAYDATE_VS_CMAKE%" -E copy "%DLLDIR%/$(ProjectName).dll" "%SOURCEDIR%/pdex.dll"
 if %errorlevel% neq 0 goto :cmEnd
 
 :cmEnd
@@ -119,7 +119,7 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
 echo. Now starting to cmake bin..
-"C:\Program Files\CMake\bin\cmake.exe" -E touch "%SOURCEDIR%/pdex.bin"
+"%PLAYDATE_VS_CMAKE%" -E touch "%SOURCEDIR%/pdex.bin"
 echo. Made bin file
 if %errorlevel% neq 0 goto :cmEnd
 
@@ -133,7 +133,7 @@ exit /b %1
 if %errorlevel% neq 0 goto :VCEnd
 echo. Removing old .pdx file..
 rmdir /s /q "%OUTPUTDIR%/$(ProjectName).pdx"
-"C:\Program Files (x86)\Playdate\bin\pdc" -sdkpath "%PDSDKDIR%" "%SOURCEDIR%" "%OUTPUTDIR%/$(ProjectName).pdx"
+"%PLAYDATE_SDK_PATH%\bin\pdc" -sdkpath "%PDSDKDIR%" "%SOURCEDIR%" "%OUTPUTDIR%/$(ProjectName).pdx"
 if %errorlevel% neq 0 goto :cmEnd
 
 :cmEnd
@@ -186,7 +186,7 @@ exit 0</Command>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>C:\Program Files (x86)\Playdate\C_API;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(PLAYDATE_SDK_PATH)\C_API;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <ExceptionHandling>
       </ExceptionHandling>
@@ -205,10 +205,10 @@ exit 0</Command>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;TARGET_SIMULATOR=1;_WINDLL=1;TARGET_EXTENSION=1;CMAKE_INTDIR=\"Release\";pd_c_game_EXPORTS</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>C:\Program Files (x86)\Playdate\C_API;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(PLAYDATE_SDK_PATH)\C_API;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>C:\Program Files (x86)\Playdate\C_API;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(PLAYDATE_SDK_PATH)\C_API;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -223,7 +223,7 @@ setlocal
 set DLLDIR=$(SolutionDir)$(Configuration)
 set OUTPUTDIR=$(SolutionDir)..
 set SOURCEDIR=$(SolutionDir)..\Source
-set PDSDKDIR=C:\Program Files (x86)\Playdate
+set PDSDKDIR=%PLAYDATE_SDK_PATH%
 
 set "DLLDIR=%DLLDIR:\=/%"
 set "OUTPUTDIR=%OUTPUTDIR:\=/%"
@@ -237,7 +237,7 @@ echo.  SOURCEDIR = %SOURCEDIR%
 echo.  PDSDKDIR  = %PDSDKDIR%
 
 echo. Now stating cmake to build dll(s)..
-"C:\Program Files\CMake\bin\cmake.exe" -E copy "%DLLDIR%/$(ProjectName).dll" "%SOURCEDIR%/pdex.dll"
+"%PLAYDATE_VS_CMAKE%" -E copy "%DLLDIR%/$(ProjectName).dll" "%SOURCEDIR%/pdex.dll"
 if %errorlevel% neq 0 goto :cmEnd
 
 :cmEnd
@@ -249,7 +249,7 @@ exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd
 echo. Now starting to cmake bin..
-"C:\Program Files\CMake\bin\cmake.exe" -E touch "%SOURCEDIR%/pdex.bin"
+"%PLAYDATE_VS_CMAKE%" -E touch "%SOURCEDIR%/pdex.bin"
 echo. Made bin file
 if %errorlevel% neq 0 goto :cmEnd
 
@@ -263,7 +263,7 @@ exit /b %1
 if %errorlevel% neq 0 goto :VCEnd
 echo. Removing old .pdx file..
 rmdir /s /q "%OUTPUTDIR%/$(ProjectName).pdx"
-"C:\Program Files (x86)\Playdate\bin\pdc" -sdkpath "%PDSDKDIR%" "%SOURCEDIR%" "%OUTPUTDIR%/$(ProjectName).pdx"
+"%PLAYDATE_SDK_PATH%\bin\pdc" -sdkpath "%PDSDKDIR%" "%SOURCEDIR%" "%OUTPUTDIR%/$(ProjectName).pdx"
 if %errorlevel% neq 0 goto :cmEnd
 
 :cmEnd
