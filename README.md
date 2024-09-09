@@ -6,13 +6,17 @@
 3. gcc-arm-none-eabi compiler [download here](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads)
 4. Install CMake [link](https://cmake.org/download/)  
 <!-- -->
-**Note:** Make sure to mark Add PATH variables during the cmake & gcc installations
+**Note!**
+* Make sure to mark Add PATH variables during the cmake & gcc installations
+* Remeber the install locations for the next section
 
-### SDK Installation Locations
-SDK is installed at C:\Program Files (x86)\Playdate\
-CMake is at C:\Program Files\CMake\bin\cmake.exe
+### Set Environment Variables
+Visual Studio solution uses below two environment variables..
 <!-- -->
-**Note:** There are still some references hardcoded from VS solution to those locations.
+1. Open the Environment Variables of Windows
+2. In the System variables section, add below two
+  * `PLAYDATE_SDK_PATH` : Value is the install directory of Playdate SDK. Mine is `C:\Program Files (x86)\Playdate\`
+  * `PLAYDATE_VS_CMAKE` : Value is the location of cmake.exe, for me it is `C:\Program Files\CMake\bin\cmake.exe`
 
 ### Repo Structure
 /build: Visual Studio Solution files\
@@ -27,12 +31,10 @@ CMake is at C:\Program Files\CMake\bin\cmake.exe
 Simply use Visual Studio to build .pdx files. That would run on simulator just fine.
 
 ### Building for Playdate Console
-Set the system environment variable `PLAYDATE_SDK_PATH` to your install path.
-<!-- -->
-Build steps
 1. Open *x64 Native Tools Command Prompt for VS 2019* from Start Menu
 2. Go to build directory of the project
 3. Execute command `cmake .. -G "NMake Makefiles" --toolchain="%PLAYDATE_SDK_PATH%\C_API\buildsupport\arm.cmake"` 
 4. Execute command `nmake`
 <!-- -->
-**Note:** I had to make sure that Source/ folder was created before running make steps.
+**Note!** 
+I had to make sure that Source/ folder was created before running make steps.
