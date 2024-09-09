@@ -8,27 +8,25 @@
 <!-- -->
 **Note!**
 * Make sure to mark Add PATH variables during the cmake & gcc installations
-* Remeber the install locations for the next section
+* Remeber the SDK & cmake install locations for next steps
 
 ### Set Environment Variables
-Visual Studio solution uses below two environment variables..
-<!-- -->
-1. Open the Environment Variables of Windows
-2. In the System variables section, add below two
-  * `PLAYDATE_SDK_PATH` : Value is the install directory of Playdate SDK. Mine is `C:\Program Files (x86)\Playdate\`
-  * `PLAYDATE_VS_CMAKE` : Value is the location of cmake.exe, for me it is `C:\Program Files\CMake\bin\cmake.exe`
+1. Open the Environment Variables of Windows OS
+2. Add below two in its System Variables section
+  * `PLAYDATE_SDK_PATH` = install directory of Playdate SDK. Mine is `C:\Program Files (x86)\Playdate\`
+  * `PLAYDATE_VS_CMAKE` = location of cmake executable. For me it is `C:\Program Files\CMake\bin\cmake.exe`
 
 ### Repo Structure
 /build: Visual Studio Solution files\
 /src: C code\
 /docs: Other project related documentation
 
-### Output
-/.pdx: Game package get created on compilation (you'd run this on Playdate Simulator)\
-/build/Debug & /build/Release: Output from VS compilation
-
 ### Building for Playdate Simulator
-Simply use Visual Studio to build .pdx files. That would run on simulator just fine.
+Simply use Visual Studio > Build > Build pd_c_game. It'd generate pdx file.
+
+### Output
+/.pdx: Game that can be ran on Playdate Simulator
+/build/Debug & /build/Release: Output from VS compilation
 
 ### Building for Playdate Console
 1. Open *x64 Native Tools Command Prompt for VS 2019* from Start Menu
