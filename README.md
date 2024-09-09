@@ -23,7 +23,7 @@
 Simply use `Visual Studio > Build > Build pd_c_game` which'd generate .pdx file
 
 ### Output
-/.pdx: Game that can be ran on Playdate Simulator
+/.pdx: Game that can be ran on Playdate Simulator\
 /build/Debug & /build/Release: Output from VS compilation
 
 ### Building for Playdate Console
