@@ -6,9 +6,7 @@
 3. gcc-arm-none-eabi compiler [download here](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads)
 4. Install CMake [link](https://cmake.org/download/)  
 <!-- -->
-**Note!**
-* Make sure to mark Add PATH variables during the cmake & gcc installations
-* Remeber the SDK & cmake install locations for next steps
+**Note!** Mark Add PATH variables during the cmake & gcc installations + Remeber the SDK & cmake install locations for next step
 
 ### Set Environment Variables
 1. Open the Environment Variables of Windows OS
@@ -22,7 +20,7 @@
 /docs: Other project related documentation
 
 ### Building for Playdate Simulator
-Simply use Visual Studio > Build > Build pd_c_game. It'd generate pdx file.
+Simply use `Visual Studio > Build > Build pd_c_game` which'd generate .pdx file
 
 ### Output
 /.pdx: Game that can be ran on Playdate Simulator
@@ -34,5 +32,4 @@ Simply use Visual Studio > Build > Build pd_c_game. It'd generate pdx file.
 3. Execute command `cmake .. -G "NMake Makefiles" --toolchain="%PLAYDATE_SDK_PATH%\C_API\buildsupport\arm.cmake"` 
 4. Execute command `nmake`
 <!-- -->
-**Note!** 
-I had to make sure that Source/ folder was created before running make steps.
+**Note!** I had to make sure that Source/ folder was created before running make steps
