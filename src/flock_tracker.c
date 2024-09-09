@@ -39,14 +39,25 @@ FlockTracker MakeFlockTracker( Vec2* flockCenter, float startingRingRadius, floa
 
 void UpdateFlockTracker( float deltaSeconds, FlockTracker* ft )
 {
-	// Ring size
-	float const ringSizeSpeed = 40.f;
 	PDButtons downButtons;
 	g_pd->system->getButtonState( &downButtons, NULL, NULL );
 
-	if( downButtons & kButtonUp )
-		ft->ringRadius += ringSizeSpeed * deltaSeconds;
+	// Center Position
+	float const movementSpeed = 50.0;
 	if( downButtons & kButtonDown )
+		ft->flockCenter->y += movementSpeed * deltaSeconds;
+	if( downButtons & kButtonUp )
+		ft->flockCenter->y -= movementSpeed * deltaSeconds;
+	if( downButtons & kButtonRight )
+		ft->flockCenter->x += movementSpeed * deltaSeconds;
+	if( downButtons & kButtonLeft )
+		ft->flockCenter->x -= movementSpeed * deltaSeconds;
+
+	// Ring size
+	float const ringSizeSpeed = 40.f;
+	if( downButtons & kButtonA )
+		ft->ringRadius += ringSizeSpeed * deltaSeconds;
+	if( downButtons & kButtonB )
 		ft->ringRadius -= ringSizeSpeed * deltaSeconds;
 
 	// Crank

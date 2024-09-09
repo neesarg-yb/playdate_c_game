@@ -10,7 +10,6 @@ static void	InitGame();
 static void TerminateGame();
 
 static void	UpdateGame( float deltaSeconds );
-static void UpdateTargetPosition( float deltaSeconds );
 static void UpdateDrawOffset();
 
 static void RenderGame();
@@ -73,7 +72,6 @@ static void TerminateGame()
 
 static void UpdateGame( float deltaSeconds )
 {
-	UpdateTargetPosition( deltaSeconds );
 	c_dogLoc.destination = c_flockTracker.targetPos;
 
 	UpdateLocomotion( deltaSeconds, &c_dogLoc );
@@ -101,11 +99,6 @@ static void UpdateDrawOffset()
 
 	c_drawOffsetX = ( int )( ( LCD_COLUMNS * 0.5f ) - centerPos.x );
 	c_drawOffsetY = ( int )( ( LCD_ROWS * 0.5f ) - centerPos.y );
-}
-
-static void UpdateTargetPosition( float deltaSeconds )
-{
-	( void ) deltaSeconds;
 }
 
 static void RenderLandField()
