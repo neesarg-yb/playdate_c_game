@@ -27,8 +27,7 @@ CMake is at C:\Program Files\CMake\bin\cmake.exe
 Simply use Visual Studio to build .pdx files. That would run on simulator just fine.
 
 ### Building for Playdate Console
-One time setup 
-* Set the system environment variable `PLAYDATE_SDK_PATH` to your install path
+Set the system environment variable `PLAYDATE_SDK_PATH` to your install path.
 <!-- -->
 Build steps
 1. Open *x64 Native Tools Command Prompt for VS 2019* from Start Menu
