@@ -1,4 +1,4 @@
-# Playdate Hello World - Visual Studio C Project
+# WIP Game where you play as a Sheep dog
 
 ### SDK & Development Tools
 1. Get latest [Playdate SDK](https://play.date/dev/) & Simulator
